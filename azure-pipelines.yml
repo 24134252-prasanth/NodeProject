@@ -22,6 +22,10 @@ steps:
     scannerMode: 'cli'
     configMode: 'file'
 
+- task: SonarCloudAnalyze@3
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+    
 - script: |
     npm install
   # npm run build

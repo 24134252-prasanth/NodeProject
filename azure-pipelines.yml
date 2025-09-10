@@ -15,6 +15,13 @@ steps:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
+- task: SonarCloudPrepare@3
+  inputs:
+    SonarQube: 'nodeProject'
+    organization: '24134252'
+    scannerMode: 'cli'
+    configMode: 'file'
+
 - script: |
     npm install
   # npm run build

@@ -22,11 +22,34 @@ steps:
     scannerMode: 'cli'
     configMode: 'file'
 
-- task: SonarCloudAnalyze@3
-  inputs:
-    jdkversion: 'JAVA_HOME_17_X64'
-    
 - script: |
     npm install
   # npm run build
   displayName: 'npm install' # and build'
+
+- task: SonarCloudAnalyze@3
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+
+- script: |
+    npm install
+  # npm run build
+  displayName: 'npm install' # and build'
+
+- task: SonarCloudPrepare@3
+  inputs:
+    SonarQube: 'nodeProject'
+    organization: '24134252'
+    scannerMode: 'cli'
+    configMode: 'manual'
+    cliProjectKey: '24134252_NodeProject'
+    cliProjectName: 'NodeProject'
+    cliSources: '.'
+    
+- task: SonarCloudAnalyze@3
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+
+- task: SonarCloudPublish@3
+  inputs:
+    pollingTimeoutSec: '300'
